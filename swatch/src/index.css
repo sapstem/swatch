@@ -227,8 +227,7 @@ body {
   font-size: var(--font-size-xs);
   font-weight: 500;
   color: var(--color-text-tertiary);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
 }
 
 .palette__controls {

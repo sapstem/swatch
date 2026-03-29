@@ -2,8 +2,9 @@ import type { Color } from '../types'
 
 type RGB = [number, number, number]
 
-// ── Color name lookup table (~50 entries, closest match wins) ──
+// ── Color name lookup table (closest match wins) ──────────
 const COLOR_NAMES: Array<{ rgb: RGB; name: string }> = [
+  // Whites & grays
   { rgb: [255, 255, 255], name: 'pure white' },
   { rgb: [245, 245, 243], name: 'soft white' },
   { rgb: [220, 218, 213], name: 'light silver' },
@@ -12,48 +13,99 @@ const COLOR_NAMES: Array<{ rgb: RGB; name: string }> = [
   { rgb: [82, 81, 77],   name: 'charcoal' },
   { rgb: [42, 41, 38],   name: 'near black' },
   { rgb: [10, 10, 10],   name: 'pure black' },
+
+  // Browns & tans
   { rgb: [253, 237, 208], name: 'warm sand' },
   { rgb: [244, 222, 179], name: 'wheat' },
   { rgb: [210, 180, 140], name: 'dusty tan' },
   { rgb: [162, 123, 92],  name: 'warm brown' },
   { rgb: [101, 67, 33],   name: 'dark chocolate' },
   { rgb: [74, 38, 18],    name: 'espresso' },
+
+  // Oranges & peaches
   { rgb: [255, 200, 148], name: 'peach' },
   { rgb: [248, 162, 96],  name: 'soft orange' },
   { rgb: [218, 97, 57],   name: 'burnt sienna' },
-  { rgb: [176, 58, 40],   name: 'brick red' },
-  { rgb: [196, 30, 30],   name: 'crimson' },
+  { rgb: [238, 196, 158], name: 'apricot' },
+
+  // Reds
+  { rgb: [255, 160, 160], name: 'light red' },
   { rgb: [252, 82, 82],   name: 'coral' },
+  { rgb: [220, 40, 40],   name: 'tomato' },
+  { rgb: [196, 30, 30],   name: 'crimson' },
+  { rgb: [176, 58, 40],   name: 'brick red' },
+  { rgb: [140, 20, 20],   name: 'deep red' },
+  { rgb: [100, 15, 15],   name: 'oxblood' },
+  { rgb: [68, 10, 10],    name: 'dark maroon' },
+
+  // Pinks — light to dark
+  { rgb: [255, 224, 230], name: 'petal' },
   { rgb: [252, 200, 200], name: 'blush' },
+  { rgb: [248, 168, 185], name: 'flamingo' },
+  { rgb: [240, 128, 160], name: 'bubblegum' },
+  { rgb: [228, 80, 130],  name: 'hot pink' },
+  { rgb: [210, 50, 100],  name: 'deep pink' },
   { rgb: [218, 158, 180], name: 'dusty rose' },
+  { rgb: [190, 120, 148], name: 'mauve' },
+  { rgb: [158, 80, 110],  name: 'antique rose' },
+
+  // Magentas & fuchsias
+  { rgb: [255, 80, 200],  name: 'fuchsia' },
+  { rgb: [220, 50, 180],  name: 'magenta' },
+  { rgb: [180, 30, 150],  name: 'deep magenta' },
+  { rgb: [200, 80, 180],  name: 'orchid' },
+  { rgb: [168, 60, 140],  name: 'mulberry' },
+
+  // Rose-reds & berry tones
   { rgb: [178, 80, 122],  name: 'raspberry' },
-  { rgb: [124, 36, 74],   name: 'wine' },
-  { rgb: [254, 240, 96],  name: 'buttercup' },
-  { rgb: [218, 196, 58],  name: 'golden' },
-  { rgb: [178, 158, 38],  name: 'olive gold' },
-  { rgb: [122, 140, 58],  name: 'moss' },
-  { rgb: [98, 120, 54],   name: 'forest floor' },
-  { rgb: [58, 98, 48],    name: 'deep green' },
-  { rgb: [38, 78, 58],    name: 'pine' },
-  { rgb: [98, 178, 138],  name: 'sage' },
-  { rgb: [158, 210, 188], name: 'seafoam' },
-  { rgb: [178, 222, 178], name: 'mint' },
+  { rgb: [148, 40, 80],   name: 'cherry' },
+  { rgb: [124, 36, 74],   name: 'cranberry' },
+  { rgb: [100, 20, 55],   name: 'wine' },
+  { rgb: [75, 10, 40],    name: 'plum noir' },
+
+  // Purples — light to dark
+  { rgb: [230, 210, 240], name: 'pale lilac' },
+  { rgb: [198, 188, 210], name: 'thistle' },
+  { rgb: [200, 160, 220], name: 'wisteria' },
+  { rgb: [178, 118, 200], name: 'lavender' },
+  { rgb: [158, 80, 190],  name: 'amethyst' },
+  { rgb: [130, 50, 170],  name: 'medium purple' },
+  { rgb: [118, 58, 178],  name: 'violet' },
+  { rgb: [88, 30, 148],   name: 'grape' },
+  { rgb: [78, 28, 138],   name: 'deep purple' },
+  { rgb: [50, 10, 100],   name: 'indigo night' },
+
+  // Blue-purples
+  { rgb: [158, 168, 200], name: 'periwinkle' },
+  { rgb: [118, 138, 178], name: 'slate blue' },
+  { rgb: [80, 90, 180],   name: 'blue violet' },
+
+  // Blues
   { rgb: [102, 162, 200], name: 'sky blue' },
   { rgb: [58, 118, 178],  name: 'cornflower' },
   { rgb: [38, 78, 158],   name: 'cobalt' },
   { rgb: [18, 38, 118],   name: 'deep navy' },
-  { rgb: [118, 138, 178], name: 'slate blue' },
-  { rgb: [158, 168, 200], name: 'periwinkle' },
-  { rgb: [178, 118, 200], name: 'lavender' },
-  { rgb: [118, 58, 178],  name: 'violet' },
-  { rgb: [78, 28, 138],   name: 'deep purple' },
-  { rgb: [198, 188, 210], name: 'pale lilac' },
+  { rgb: [178, 200, 220], name: 'powder blue' },
+
+  // Greens
+  { rgb: [178, 222, 178], name: 'mint' },
+  { rgb: [158, 210, 188], name: 'seafoam' },
+  { rgb: [98, 178, 138],  name: 'sage' },
+  { rgb: [122, 140, 58],  name: 'moss' },
+  { rgb: [98, 120, 54],   name: 'forest floor' },
+  { rgb: [58, 98, 48],    name: 'deep green' },
+  { rgb: [38, 78, 58],    name: 'pine' },
+  { rgb: [198, 210, 198], name: 'pale sage' },
+
+  // Yellows & golds
+  { rgb: [254, 240, 96],  name: 'buttercup' },
+  { rgb: [248, 228, 148], name: 'pale gold' },
+  { rgb: [218, 196, 58],  name: 'golden' },
+  { rgb: [178, 158, 38],  name: 'olive gold' },
+
+  // Warm neutrals
   { rgb: [238, 228, 208], name: 'linen' },
   { rgb: [228, 218, 196], name: 'cream' },
-  { rgb: [198, 210, 198], name: 'pale sage' },
-  { rgb: [178, 200, 220], name: 'powder blue' },
-  { rgb: [238, 196, 158], name: 'apricot' },
-  { rgb: [248, 228, 148], name: 'pale gold' },
 ]
 
 // Perceptually-weighted distance in RGB space

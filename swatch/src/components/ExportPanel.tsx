@@ -29,7 +29,7 @@ ${entries}
 }
 
 function toHexList(colors: Color[]): string {
-  return colors.map((c) => `${c.hex}  ${c.name}  ${c.percentage}%`).join('\n')
+  return colors.map((c) => c.hex).join('\n')
 }
 
 function getContent(colors: Color[], format: ExportFormat): string {
